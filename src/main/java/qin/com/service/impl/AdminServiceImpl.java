@@ -47,4 +47,39 @@ public class AdminServiceImpl implements AdminService {
     public List<Admin> selectAll() {
         return adminMapper.selectAll();
     }
+
+    @Override
+    public int checkAdmin(String name) {
+        return 0;
+    }
+
+    @Override
+    public int checkEmail(String email) {
+        return 0;
+    }
+
+    @Override
+    public int checkPhone(String phone) {
+        return 0;
+    }
+
+    @Override
+    public int checkPass(String pass) {
+        return 0;
+    }
+
+    @Override
+    public boolean checkNameAndPass(String name, String pass) {
+        return false;
+    }
+
+    @Override
+    public boolean checkEmailAndPass(String email, String pass) {
+        return false;
+    }
+
+    @Override
+    public boolean checkPhoneAndPass(String phone, String pass) {
+        return false;
+    }
 }

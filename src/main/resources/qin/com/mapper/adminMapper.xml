@@ -5,7 +5,6 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="pass" property="pass" jdbcType="VARCHAR" />
-    <result column="atype" property="atype" jdbcType="VARCHAR" />
     <result column="phone" property="phone" jdbcType="VARCHAR" />
     <result column="email" property="email" jdbcType="VARCHAR" />
     <result column="qq" property="qq" jdbcType="VARCHAR" />
@@ -13,14 +12,16 @@
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, name, pass, atype, phone, email, qq, create_time, update_time
+    id, name, pass, phone, email, qq, create_time, update_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from admin
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from admin
     where id = #{id,jdbcType=INTEGER}
@@ -29,12 +30,12 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into admin (name, pass, atype, 
-      phone, email, qq, create_time, 
-      update_time)
-    values (#{name,jdbcType=VARCHAR}, #{pass,jdbcType=VARCHAR}, #{atype,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP})
+    insert into admin (name, pass, phone,
+    email, qq, create_time,
+    update_time)
+    values (#{name,jdbcType=VARCHAR}, #{pass,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
+    #{email,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, now(),
+    now())
   </insert>
   <insert id="insertSelective" parameterType="qin.com.entity.Admin" >
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
@@ -47,9 +48,6 @@
       </if>
       <if test="pass != null" >
         pass,
-      </if>
-      <if test="atype != null" >
-        atype,
       </if>
       <if test="phone != null" >
         phone,
@@ -74,9 +72,6 @@
       <if test="pass != null" >
         #{pass,jdbcType=VARCHAR},
       </if>
-      <if test="atype != null" >
-        #{atype,jdbcType=VARCHAR},
-      </if>
       <if test="phone != null" >
         #{phone,jdbcType=VARCHAR},
       </if>
@@ -87,10 +82,10 @@
         #{qq,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
+        now(),
       </if>
       <if test="updateTime != null" >
-        #{updateTime,jdbcType=TIMESTAMP},
+        now(),
       </if>
     </trim>
   </insert>
@@ -102,9 +97,6 @@
       </if>
       <if test="pass != null" >
         pass = #{pass,jdbcType=VARCHAR},
-      </if>
-      <if test="atype != null" >
-        atype = #{atype,jdbcType=VARCHAR},
       </if>
       <if test="phone != null" >
         phone = #{phone,jdbcType=VARCHAR},
@@ -119,7 +111,7 @@
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        now(),
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -128,12 +120,42 @@
     update admin
     set name = #{name,jdbcType=VARCHAR},
       pass = #{pass,jdbcType=VARCHAR},
-      atype = #{atype,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       qq = #{qq,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
+      update_time = now()
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from admin
+  </select>
+
+  <select id="checkAdmin" resultType="int">
+    select count(1)
+    from admin
+    where name=#{name}
+  </select>
+
+  <select id="checkEmail" resultType="int">
+    select count(1)
+    from admin
+    where emain=#{email}
+  </select>
+
+  <select id="checkPhone" resultType="int">
+    select count(1)
+    from admin
+    where phone=#{phone}
+  </select>
+
+  <select id="checkPass" resultType="int">
+    select count(1)
+    from admin
+    where pass=#{pass}
+  </select>
+
 </mapper>
