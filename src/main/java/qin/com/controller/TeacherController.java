@@ -2,16 +2,6 @@ package qin.com.controller;
 
 import qin.com.entity.Teacher;
 
-public interface TeacherController {
-    int deleteByPrimaryKey(Integer id);
+public class TeacherController {
 
-    int insert(Teacher record);
-
-    int insertSelective(Teacher record);
-
-    Teacher selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(Teacher record);
-
-    int updateByPrimaryKey(Teacher record);
 }

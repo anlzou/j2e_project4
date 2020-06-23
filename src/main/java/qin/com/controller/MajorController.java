@@ -2,16 +2,6 @@ package qin.com.controller;
 
 import qin.com.entity.Major;
 
-public interface MajorController {
-    int deleteByPrimaryKey(Integer id);
+public class MajorController {
 
-    int insert(Major record);
-
-    int insertSelective(Major record);
-
-    Major selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(Major record);
-
-    int updateByPrimaryKey(Major record);
 }
