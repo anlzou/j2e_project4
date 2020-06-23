@@ -2,6 +2,8 @@ package qin.com.service;
 
 import qin.com.entity.Admin;
 
+import java.util.List;
+
 public interface AdminService {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,6 @@ public interface AdminService {
     int updateByPrimaryKeySelective(Admin record);
 
     int updateByPrimaryKey(Admin record);
+
+    List<Admin> selectAll();
 }

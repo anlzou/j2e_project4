@@ -6,6 +6,8 @@ import qin.com.entity.Admin;
 import qin.com.mapper.AdminMapper;
 import qin.com.service.AdminService;
 
+import java.util.List;
+
 @Service("adminServiceImpl")  //注解为业务类，并且方便在控制器中注入我们这个业务类
 public class AdminServiceImpl implements AdminService {
     @Autowired  //注解表示后面的定义的变量spring自动为我们进行封装
@@ -39,5 +41,10 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public int updateByPrimaryKey(Admin record) {
         return adminMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public List<Admin> selectAll() {
+        return adminMapper.selectAll();
     }
 }
